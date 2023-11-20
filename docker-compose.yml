@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgis_pgvector:
-#    image: joshuasundance/postgis_pgvector:0.0.1
+#    image: joshuasundance/postgis_pgvector:1.0.0
     container_name: postgis_pgvector
     build:
       context: .
