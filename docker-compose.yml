@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgis_pgvector:
+#    image: joshuasundance/postgis_pgvector:0.0.1
+    container_name: postgis_pgvector
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis_pgvector_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-mysecretpassword}"
+      POSTGRES_DB: "${POSTGRES_DB:-mydb}"
+    networks:
+      - postgis_pgvector
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:7.8
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL:-admin@admin.com}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD:-admin}"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - postgis_pgvector
+
+volumes:
+  postgis_pgvector_data:
+  pgadmin_data:
+
+networks:
+  postgis_pgvector:
+    driver: bridge

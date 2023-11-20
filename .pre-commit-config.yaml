@@ -1,0 +1,28 @@
+# Don't know what this file is? See https://pre-commit.com/
+#   pip install pre-commit
+#   pre-commit install
+#   pre-commit autoupdate
+# Apply to all files without commiting:
+#   pre-commit run --all-files
+#   I recommend running this until you pass all checks, and then commit.
+#   Fix what you need to and then let the pre-commit hooks resolve their conflicts.
+#   You may need to git add -u between runs.
+exclude: "AI_CHANGELOG.md"
+repos:
+-   repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.9.0
+    hooks:
+    -   id: shellcheck
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: debug-statements
+    -   id: check-case-conflict
+    -   id: check-executables-have-shebangs
+    -   id: fix-byte-order-marker
+    -   id: detect-private-key
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: mixed-line-ending
